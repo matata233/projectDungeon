@@ -23,4 +23,14 @@
 <li>Perhaps my project can be further expanded in the future.</li>
 </ul>
 
-### ***Enjoy your journey !*** ###
+### ***Enjoy your journey !*** 
+
+## User Stories 
+<ul>
+<li>As a player, I want to create my own character</li>
+<li>As a player, I want to check my current stats</li>
+<li>As a player, I want to check my inventory</li>
+<li>As a player, I want to create my own character</li>
+<li>As a player, I want to wear an armor (add an equipment to my character)</li>
+<li>As a player, I want to loot treasures/equipment ((add a thing to my inventory)</li>
+</ul>
