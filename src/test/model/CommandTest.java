@@ -35,26 +35,31 @@ class CommandTest {
     void moveCommand() {
         this.playableCharacter.posX = 1;
         this.playableCharacter.posY = 1;
+        String msg = "You move onward.";
         //case w
         this.command.setCommand("w");
-        this.playableCharacter.move(this.command.getCommand());
+        assertEquals(msg, this.command.moveCommand());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(0, this.playableCharacter.posY);
+
         //case s
         this.command.setCommand("s");
-        this.playableCharacter.move(this.command.getCommand());
+        assertEquals(msg, this.command.moveCommand());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
+
         //case a
         this.command.setCommand("a");
-        this.playableCharacter.move(this.command.getCommand());
+        assertEquals(msg, this.command.moveCommand());
         assertEquals(0, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
+
         //case d
         this.command.setCommand("d");
-        this.playableCharacter.move(this.command.getCommand());
+        assertEquals(msg, this.command.moveCommand());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
+
     }
 
     @Test
@@ -111,10 +116,12 @@ class CommandTest {
         this.command.setCommand("/ch");
         assertEquals(msg + testMsg, this.command.chCommand());
         //case: have a weapon in main hand
-        this.playableCharacter.equip(new Weapon("rusted sword", 1, 0));
+        Item item = new Weapon("rusted sword", 1, 0);
+        this.playableCharacter.add(item);
+        this.playableCharacter.equip(item);
         Weapon weapon = (Weapon) this.playableCharacter.mainHand.get(0);
-        testMsg += "\n" + weapon.name
-                + " (Bonus attack: +" + weapon.attack;
+        testMsg = "\n" + weapon.name
+                + " (Bonus attack: +" + weapon.attack + ")";
         assertEquals(msg + testMsg, this.command.chCommand());
     }
 

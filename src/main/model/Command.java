@@ -85,7 +85,7 @@ public class Command {
         } else {
             Weapon weapon = (Weapon) this.playableCharacter.mainHand.get(0);
             msg += "\n" + weapon.name
-                    + " (Bonus attack: +" + weapon.attack;
+                    + " (Bonus attack: +" + weapon.attack + ")";
         }
         return msg;
     }
@@ -114,7 +114,7 @@ public class Command {
         return this.command;
     }
 
-    public void setCommand(String command) {
+    protected void setCommand(String command) {
         this.command = command;
     }
 }

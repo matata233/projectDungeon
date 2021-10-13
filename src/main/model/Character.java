@@ -39,41 +39,21 @@ public abstract class Character {
 //        return "";//stub
 //    }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    public void setHitPoint(int hitPoint) {
+    protected void setHitPoint(int hitPoint) {
         this.hitPoint = hitPoint;
     }
 
-    public void setPosX(int posX) {
+    protected void setPosX(int posX) {
         this.posX = posX;
     }
 
-    public void setPosY(int posY) {
+    protected void setPosY(int posY) {
         this.posY = posY;
 
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getDefence() {
-        return defence;
     }
 
     public int getHitPoint() {

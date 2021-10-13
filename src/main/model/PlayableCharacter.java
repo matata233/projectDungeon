@@ -61,15 +61,15 @@ public class PlayableCharacter extends Character {
         if (!(item instanceof Gear)) {
             msg = "Huh? What am I doing...? Trying to equip the " + item.getName() + " ?";
         } else {
-            if (item instanceof Weapon) {
-                if (!this.mainHand.isEmpty()) {
-                    Item ogItem = this.mainHand.remove(0);
-                    this.inventory.add(ogItem);
-                    msg += "\nYou put your " + ogItem.name + " back to your backpack.";
-                }
-                this.inventory.remove(item);
-                this.mainHand.add(item);
+            //if (item instanceof Weapon) {
+            if (!this.mainHand.isEmpty()) {
+                Item ogItem = this.mainHand.remove(0);
+                this.inventory.add(ogItem);
+                msg += "\nYou put your " + ogItem.name + " back to your backpack.";
+                //    }
             }
+            this.inventory.remove(item);
+            this.mainHand.add(item);
         }
         return msg;
     }
@@ -85,9 +85,9 @@ public class PlayableCharacter extends Character {
         } else {
             this.inventory.remove(item);
             msg = item.effect();
-            if (item instanceof Potion) {
-                this.setHitPoint(this.hitPoint += 3);
-            }
+            //if (item instanceof Potion) {
+            this.setHitPoint(this.hitPoint += 3);
+            //}
         }
         return msg;
     }
@@ -125,7 +125,7 @@ public class PlayableCharacter extends Character {
     // MODIFIES: this
     // EFFECTS:  returns true if this character has collided with the wall and restore the boundary of posX or posY
     //           false otherwise
-    public boolean isCollied() {
+    protected boolean isCollied() {
         if (this.posX > 4) {
             this.posX = 4;
         } else if (this.posX < 0) {

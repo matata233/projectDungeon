@@ -16,15 +16,7 @@ public abstract class Item {
     protected abstract String effect();
 
 
-    public String getName() {
+    protected String getName() {
         return name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 }

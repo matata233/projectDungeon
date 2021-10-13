@@ -43,7 +43,7 @@ class PlayableCharacterTest {
         assertEquals(0, this.pc.inventory.size());
         Item item = new Weapon("Rusted Sword", 1, 0);
         String msg = "You found " + 1 + " " + "Rusted Sword";
-        assertEquals(msg, this, pc.add(item));
+        assertEquals(msg, this.pc.add(item));
         assertEquals(1, this.pc.inventory.size());
     }
 
@@ -69,7 +69,7 @@ class PlayableCharacterTest {
         assertEquals(1, this.pc.mainHand.size());
         //case: equip a weapon when there is a weapon on pc's main hand
         passMsg = item3.effect();
-        passMsg += "\nYou put your " + item3.name + " back to your backpack.";
+        passMsg += "\nYou put your " + item1.name + " back to your backpack.";
         assertEquals(passMsg, this.pc.equip(item3));
         assertEquals(2, this.pc.inventory.size());
         assertEquals(1, this.pc.mainHand.size());
@@ -80,7 +80,7 @@ class PlayableCharacterTest {
         Item item1 = new Weapon("Rusted Sword", 1, 0);
         Item item2 = new Potion("Potion");
         Item item3 = new Potion("Potion");
-        String failMsg = "Huh? What am I doing...? Trying to eat the " + item2.getName() + " ?";
+        String failMsg = "Huh? What am I doing...? Trying to eat the " + item1.getName() + " ?";
         String passMsg = item2.effect();
         this.pc.add(item1);
         this.pc.add(item2);
@@ -118,16 +118,19 @@ class PlayableCharacterTest {
         //case: move west
         assertEquals(colliedMsg, this.pc.move("a"));
         assertEquals(0, this.pc.getPosX());
-        assertEquals(0, this.pc.getPosY());
+        assertEquals(1, this.pc.getPosY());
         //case: move east
         assertEquals(msg, this.pc.move("d"));
         assertEquals(1, this.pc.getPosX());
-        assertEquals(0, this.pc.getPosY());
-        //case: no input
+        assertEquals(1, this.pc.getPosY());
+        //case: no input/random invalid input
         msg = "You seems unable to decide where to go. You take your time to think about it.";
+        assertEquals(msg, this.pc.move("ghjkk"));
+        assertEquals(1, this.pc.getPosX());
+        assertEquals(1, this.pc.getPosY());
         assertEquals(msg, this.pc.move(""));
         assertEquals(1, this.pc.getPosX());
-        assertEquals(0, this.pc.getPosY());
+        assertEquals(1, this.pc.getPosY());
     }
 
     @Test
