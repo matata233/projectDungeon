@@ -2,12 +2,11 @@
 
 ## A text-based fantasy dungeon adventure game
 
-**What will the apllication do?**
+**What will the application do?**
 <ul>
 <li>A simplified, text-based, 5x5 dungeon encounter game that explore 3 different levels of a dungeon.</li>
-<li>You can customize your characters</li>
-<li>You may encouter traps in the Dungeon</li>
-<li>You may encouter monsters in the Dungeon</li>
+<li>You may encounter random events in the Dungeon</li>
+<li>You may encounter monsters in the Dungeon</li>
 <li>You may find some treasure in the Dungeon</li>
 </ul>
   
@@ -18,9 +17,9 @@
 
 **Why is this project of interest to you?**
 <ul>
-<li>I am exicted that I am available to make my first own game !</li>
+<li>I am exited that I am available to make my first own game.</li>
 <li>I can apply what I have learn in class in real practice.</li>
-<li>Perhaps my project can be further expanded in the future.</li>
+<li>My project can be further expanded in the future, adding more game elements and mechanic.</li>
 </ul>
 
 ### ***Enjoy your journey !*** 
@@ -30,7 +29,6 @@
 <li>As a player, I want to create my own character</li>
 <li>As a player, I want to check my current stats</li>
 <li>As a player, I want to check my inventory</li>
-<li>As a player, I want to create my own character</li>
-<li>As a player, I want to wear an armor (add an equipment to my character)</li>
-<li>As a player, I want to loot treasures/equipment ((add a thing to my inventory)</li>
+<li>As a player, I want to equip a weapon (add an equipment to my character)</li>
+<li>As a player, I want to loot an item ((add a thing to my inventory)</li>
 </ul>
