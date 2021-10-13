@@ -39,10 +39,6 @@ public abstract class Character {
 //        return "";//stub
 //    }
 
-    protected void setName(String name) {
-        this.name = name;
-    }
-
     protected void setHitPoint(int hitPoint) {
         this.hitPoint = hitPoint;
     }
