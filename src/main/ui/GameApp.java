@@ -44,8 +44,9 @@ public class GameApp {
     }
 
     // Sets / resets the game
+    // REQUIRES: User input must be an integer
     // MODIFIES: this
-    // EFFECTS:  clears list of missiles and invaders, initializes tank
+    // EFFECTS:  Return to the main game menu, reset the game status to the beginning
     public void reset() {
         mainMenu();
         this.sc.reset();
