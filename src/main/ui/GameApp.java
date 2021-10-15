@@ -18,7 +18,7 @@ public class GameApp {
     //private int level; //tbd
     private PlayableCharacter pc;
     //private NonPlayableCharacter npc; //tbd
-    private int option;
+    private String option;
     private boolean gameOver;
     private final Scanner sc;
 
@@ -50,9 +50,9 @@ public class GameApp {
     public void reset() {
         mainMenu();
         this.sc.reset();
-        this.option = this.sc.nextInt();
+        this.option = this.sc.next();
         switch (option) {
-            case 1:
+            case "1":
                 this.gameOver = false;
                 createCharacter();
                 runDungeon();
