@@ -4,6 +4,7 @@ package model;
  * Represents a command from user input.
  */
 public class Command {
+    public static final String HELP = "/help";
     public static final String MOVE_NORTH = "w";
     public static final String MOVE_SOUTH = "s";
     public static final String MOVE_WEST = "a";

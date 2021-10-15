@@ -101,23 +101,23 @@ public class GameApp {
     // EFFECTS:  Execute given command from user
     public void executeCommand(Command userCommand) {
         switch (userCommand.getCommand()) {
-            case "/help": //get a full command list
+            case Command.HELP: //get a full command list
                 System.out.println(Command.COMMAND_LIST);
                 break;
-            case "/ch":
+            case Command.CHAR_STATUS:
                 //print out the status of PC
                 System.out.println(userCommand.chCommand());
                 break;
-            case "/i":
+            case Command.INVENTORY_LIST:
                 //print out a list of pc's inventory
                 System.out.println(userCommand.itemListCommand());
                 break;
-            case "/loc":
+            case Command.GET_LOCATION:
                 //print out the current location of pc
                 System.out.println(userCommand.locCommand());
                 break;
-            case "/eq":
-            case "/use":
+            case Command.EQUIP:
+            case Command.USE:
                 //equip an item
                 //use an item
                 System.out.println(itemCommand(userCommand));
@@ -140,9 +140,9 @@ public class GameApp {
         sc.nextLine();
         String userInput = sc.nextLine().toLowerCase();
         Command itemName = new Command(userInput, this.pc);
-        if (command.getCommand().charAt(1) == 'e') {
+        if (command.getCommand().equalsIgnoreCase(Command.EQUIP)) {
             msg = itemName.eqCommand();
-        } else if (command.getCommand().charAt(1) == 'u') {
+        } else if (command.getCommand().equalsIgnoreCase(Command.USE)) {
             msg = itemName.useCommand();
         } else {
             msg = "You can't decide what to do...";
