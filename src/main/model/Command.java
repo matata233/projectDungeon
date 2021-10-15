@@ -11,9 +11,9 @@ public class Command {
             + "d - move east\n"
             + "/ch - view your character status\n"
             + "/i - view your inventory\n"
-            + "/loc - check your current location"
+            + "/loc - check your current location\n"
             + "/eq - equip a weapon/armor\n"
-            + "/use - use a consumable item";
+            + "/use - use a consumable item\n";
 
     private String command;
     private PlayableCharacter playableCharacter;
