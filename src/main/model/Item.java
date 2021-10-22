@@ -13,6 +13,7 @@ public abstract class Item {
         this.amount = amount;
     }
 
+    // EFFECTS: Create a system message of the effect of the item
     protected abstract String effect();
 
 

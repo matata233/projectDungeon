@@ -28,3 +28,5 @@
 - As a player, I want to check my inventory
 - As a player, I want to equip a weapon (add equipment to my character)
 - As a player, I want to loot an item ((add a thing to my inventory)
+- As a player, I want to save my progress of the game to file
+- As a player, I want to load my past progress and continue the game
