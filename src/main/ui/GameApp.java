@@ -139,7 +139,6 @@ public class GameApp {
         reset();
     }
 
-    @SuppressWarnings("methodlength")
     // MODIFIES: this
     // EFFECTS:  Execute given command from user
     public void executeCommand(Command userCommand) {
@@ -165,6 +164,17 @@ public class GameApp {
                 //use an item
                 System.out.println(itemCommand(userCommand));
                 break;
+            default:
+                //list continue in the next method
+                executeCommandCont(userCommand);
+                break;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  Execute given command from user (to avoid method length restriction)
+    public void executeCommandCont(Command userCommand) {
+        switch (userCommand.getCommand()) {
             case Command.SAVE:
                 //save the current game
                 saveGame();
