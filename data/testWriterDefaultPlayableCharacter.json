@@ -1,0 +1,10 @@
+{
+    "posX": 0,
+    "posY": 0,
+    "mainHand": [],
+    "defence": 0,
+    "attack": 1,
+    "name": "My character",
+    "hitPoint": 8,
+    "inventory": []
+}

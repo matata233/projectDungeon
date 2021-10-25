@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 /*
  * Represents an abstract class of gear.
  */
@@ -17,5 +19,13 @@ public abstract class Gear extends Item {
     // EFFECTS: Create a system message of when player equip a gear
     protected String effect() {
         return "You equipped the " + this.name + ".\n";
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = super.toJson();
+        json.put("attack", this.attack);
+        json.put("defence", this.defence);
+        return json;
     }
 }

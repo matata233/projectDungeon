@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /*
  * Represents a playable character.
  */
@@ -10,6 +12,20 @@ public class PlayableCharacter extends Character {
     // EFFECTS: a playable character with given name
     public PlayableCharacter(String name) {
         super.name = name;
+    }
+
+    // Constructs a playable character with given data
+    // EFFECTS: a playable character with given data
+    public PlayableCharacter(String name, int atk, int def, int hp, int posX, int posY,
+                             List<Item> inventory, List<Item> mainHand) {
+        this.inventory = inventory;
+        this.mainHand = mainHand;
+        this.name = name;
+        this.attack = atk;
+        this.defence = def;
+        this.hitPoint = hp;
+        this.posX = posX;
+        this.posY = posY;
     }
 
     // Hit a character (TBD)

@@ -14,6 +14,8 @@ public class Command {
     public static final String GET_LOCATION = "/loc";
     public static final String EQUIP = "/eq";
     public static final String USE = "/use";
+    public static final String SAVE = "/save";
+    public static final String LOAD = "/load";
 
     public static final String COMMAND_LIST
             = MOVE_NORTH + " - move north\n"
@@ -24,7 +26,9 @@ public class Command {
             + INVENTORY_LIST + " - view your inventory\n"
             + GET_LOCATION + " - check your current location\n"
             + EQUIP + " - equip a weapon/armor\n"
-            + USE + " - use a consumable item\n";
+            + USE + " - use a consumable item\n"
+            + SAVE + " - save the current game\n"
+            + LOAD + " - load the previous game\n";
 
     private String command;
     private PlayableCharacter playableCharacter;

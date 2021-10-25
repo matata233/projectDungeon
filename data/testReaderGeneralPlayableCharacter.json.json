@@ -1,0 +1,26 @@
+{
+    "posX": 3,
+    "posY": 3,
+    "mainHand": [{
+        "amount": 1,
+        "defence": 0,
+        "attack": 2,
+        "name": "test sword2"
+    }],
+    "defence": 0,
+    "attack": 1,
+    "name": "My character",
+    "hitPoint": 6,
+    "inventory": [
+        {
+            "amount": 1,
+            "name": "test potion"
+        },
+        {
+            "amount": 1,
+            "defence": 0,
+            "attack": 1,
+            "name": "test sword1"
+        }
+    ]
+}

@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 /*
  * Represents an abstract class of item.
  */
-public abstract class Item {
+public abstract class Item implements Writable {
     protected String name;
     protected int amount;
 
@@ -17,7 +20,15 @@ public abstract class Item {
     protected abstract String effect();
 
 
-    protected String getName() {
+    public String getName() {
         return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("amount", this.amount);
+        return json;
     }
 }

@@ -1,16 +1,21 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 /*
- * Represents the main console base UI of the game.
+ * Represents the main game application.
  */
 public class GameApp {
+    private static final String JSON_STORE = "./data/pc.json";
     public static final int DUNGEON_SIZE = 5;
     public static final Random RND = new Random();
 
@@ -21,6 +26,8 @@ public class GameApp {
     private String option;
     private boolean gameOver;
     private final Scanner sc;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS:  Constructs a dungeon Game with a 5x5 dungeon
     public GameApp() {
@@ -31,6 +38,8 @@ public class GameApp {
         //this.level = 1;
         this.gameOver = false;
         this.sc = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS:  Constructs the main menu of the game
@@ -38,6 +47,7 @@ public class GameApp {
         System.out.println("Welcome to Dungeon adventure!");
         System.out.println("Please select one of the following option: ");
         System.out.println("1. Start a new game");
+        System.out.println("2. Continue from previous game");
         System.out.println("0. Exit");
         System.out.println();
         System.out.print("> ");
@@ -57,9 +67,41 @@ public class GameApp {
                 createCharacter();
                 runDungeon();
                 break;
+            case "2":
+                try {
+                    loadGame();
+                    runDungeon();
+                } catch (IOException e) {
+                    System.out.println("Unable to read from file: " + JSON_STORE);
+                    System.out.println("Returning to the main menu..." + "\n");
+                    reset();
+                }
+                break;
             default:
                 this.sc.close();
                 System.out.println("Thanks for playing!");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads previous character from file
+    private void loadGame() throws IOException {
+        this.pc = jsonReader.read();
+        System.out.println("Loaded " + this.pc.getName() + " from " + JSON_STORE);
+        System.out.println();
+        runDungeon();
+    }
+
+    // EFFECTS: saves the game to file
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(this.pc);
+            jsonWriter.close();
+            System.out.println("Saved " + this.pc.getName() + " to " + JSON_STORE);
+            System.out.println();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -97,6 +139,7 @@ public class GameApp {
         reset();
     }
 
+    @SuppressWarnings("methodlength")
     // MODIFIES: this
     // EFFECTS:  Execute given command from user
     public void executeCommand(Command userCommand) {
@@ -121,6 +164,18 @@ public class GameApp {
                 //equip an item
                 //use an item
                 System.out.println(itemCommand(userCommand));
+                break;
+            case Command.SAVE:
+                //save the current game
+                saveGame();
+                break;
+            case Command.LOAD:
+                //load the previous game
+                try {
+                    loadGame();
+                } catch (IOException e) {
+                    System.out.println("Unable to read from file: " + JSON_STORE + "\n");
+                }
                 break;
             default:
                 System.out.println("You do nothing...");
@@ -180,10 +235,10 @@ public class GameApp {
     private boolean isOver() {
         if (this.pc.getPosX() == 2 && this.pc.getPosY() == 2) {
             gameOver = true;
-            System.out.println("You found the exit!");
+            System.out.println("You found the exit!\n");
         } else if (this.pc.getHitPoint() <= 0) {
             gameOver = true;
-            System.out.println("You become unconscious...");
+            System.out.println("You become unconscious...\n");
         }
         return gameOver;
     }

@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * Represents an abstract class of character.
  */
-public abstract class Character {
+public abstract class Character implements Writable {
     protected List<Item> inventory;
     protected List<Item> mainHand;
     protected String name;
@@ -43,13 +47,12 @@ public abstract class Character {
         this.hitPoint = hitPoint;
     }
 
-    protected void setPosX(int posX) {
-        this.posX = posX;
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 
-    protected void setPosY(int posY) {
-        this.posY = posY;
-
+    public void setPosX(int posX) {
+        this.posX = posX;
     }
 
     public int getHitPoint() {
@@ -62,5 +65,53 @@ public abstract class Character {
 
     public int getPosY() {
         return posY;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Item> getMainHand() {
+        return mainHand;
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("attack", this.attack);
+        json.put("defence", this.defence);
+        json.put("hitPoint", this.hitPoint);
+        json.put("posX", this.posX);
+        json.put("posY", this.posY);
+        json.put("inventory", inventoryToJson());
+        json.put("mainHand", mainHandToJson());
+        return json;
+    }
+
+    // EFFECTS: returns items from inventory in this Character as a JSON array
+    private JSONArray inventoryToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item item : this.inventory) {
+            jsonArray.put(item.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns items from mainHand in this Character as a JSON array
+    private JSONArray mainHandToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item item : this.mainHand) {
+            jsonArray.put(item.toJson());
+        }
+
+        return jsonArray;
     }
 }
