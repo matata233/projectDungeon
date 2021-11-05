@@ -252,4 +252,12 @@ public class GameApp {
         }
         return gameOver;
     }
+
+    /*
+     * Play the game in console
+     */
+    public static void main(String[] args) {
+        GameApp gameApp = new GameApp();
+        gameApp.reset();
+    }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 /*
  * Represents a potion.
  */

@@ -4,18 +4,20 @@ package model;
  * Represents a command from user input.
  */
 public class Command {
-    public static final String HELP = "/help";
-    public static final String MOVE_NORTH = "w";
-    public static final String MOVE_SOUTH = "s";
-    public static final String MOVE_WEST = "a";
-    public static final String MOVE_EAST = "d";
-    public static final String CHAR_STATUS = "/ch";
-    public static final String INVENTORY_LIST = "/i";
-    public static final String GET_LOCATION = "/loc";
-    public static final String EQUIP = "/eq";
-    public static final String USE = "/use";
-    public static final String SAVE = "/save";
-    public static final String LOAD = "/load";
+    public static final String HELP = "HELP";
+    public static final String MOVE_NORTH = "MOVE North";
+    public static final String MOVE_SOUTH = "MOVE South";
+    public static final String MOVE_WEST = "MOVE West";
+    public static final String MOVE_EAST = "MOVE East";
+    public static final String CHAR_STATUS = "Status";
+    public static final String INVENTORY_LIST = "Inv";
+    public static final String GET_LOCATION = "LOC";
+    public static final String EQUIP = "Equip";
+    public static final String USE = "Use";
+    public static final String SAVE = "SAVE";
+    public static final String LOAD = "LOAD";
+    public static final String NEW_GAME = "NEW GAME";
+    public static final String EXIT = "EXIT";
 
     public static final String COMMAND_LIST
             = MOVE_NORTH + " - move north\n"

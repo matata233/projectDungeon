@@ -1,0 +1,20 @@
+{
+    "posX": 3,
+    "posY": 0,
+    "mainHand": [{
+        "amount": 1,
+        "defence": 0,
+        "attack": 1,
+        "name": "Rusted Sword"
+    }],
+    "defence": 0,
+    "attack": 1,
+    "name": "JJ",
+    "hitPoint": 7,
+    "inventory": [{
+        "amount": 1,
+        "defence": 0,
+        "attack": 2,
+        "name": "Iron Sword"
+    }]
+}

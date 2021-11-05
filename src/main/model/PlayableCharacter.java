@@ -116,16 +116,16 @@ public class PlayableCharacter extends Character {
     public String move(String userInput) {
         String msg = "You move onward.";
         switch (userInput) {
-            case "w":
+            case Command.MOVE_NORTH:
                 this.posY -= 1;
                 break;
-            case "s":
+            case Command.MOVE_SOUTH:
                 this.posY += 1;
                 break;
-            case "a":
+            case Command.MOVE_WEST:
                 this.posX -= 1;
                 break;
-            case "d":
+            case Command.MOVE_EAST:
                 this.posX += 1;
                 break;
             default:
