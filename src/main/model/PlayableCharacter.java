@@ -11,7 +11,10 @@ public class PlayableCharacter extends Character {
     // Constructs a playable character
     // EFFECTS: a playable character with given name
     public PlayableCharacter(String name) {
-        super.name = name;
+        super();
+        if (!name.isEmpty()) {
+            super.name = name;
+        }
     }
 
     // Constructs a playable character with given data

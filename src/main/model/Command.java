@@ -9,9 +9,9 @@ public class Command {
     public static final String MOVE_SOUTH = "MOVE South";
     public static final String MOVE_WEST = "MOVE West";
     public static final String MOVE_EAST = "MOVE East";
-    public static final String CHAR_STATUS = "Status";
-    public static final String INVENTORY_LIST = "Inv";
-    public static final String GET_LOCATION = "LOC";
+    public static final String CHAR_STATUS = "Player Status";
+    public static final String INVENTORY_LIST = "Inventory";
+    public static final String GET_LOCATION = "Location";
     public static final String EQUIP = "Equip";
     public static final String USE = "Use";
     public static final String SAVE = "SAVE";
@@ -90,18 +90,18 @@ public class Command {
     // EFFECTS: Return the current status of the player
     public String chCommand() {
         String msg = "";
-        msg += "Name:" + this.playableCharacter.name + "\n";
-        msg += "Attack: " + this.playableCharacter.attack + "\n";
-        msg += "Defence: " + this.playableCharacter.defence + "\n";
+        msg += "Name:" + this.playableCharacter.name + "\n\n";
+        msg += "Attack: " + this.playableCharacter.attack + "\n\n";
+        msg += "Defence: " + this.playableCharacter.defence + "\n\n";
         msg += "Current HP " + "/" + " Max HP: "
                 + this.playableCharacter.hitPoint + "/"
-                + PlayableCharacter.MAX_HITPOINT + "\n";
+                + PlayableCharacter.MAX_HITPOINT + "\n\n";
         msg += "Equipped gear: ";
         if (this.playableCharacter.mainHand.isEmpty()) {
             msg += "none";
         } else {
             Weapon weapon = (Weapon) this.playableCharacter.mainHand.get(0);
-            msg += "\n" + weapon.name
+            msg += "\n\n" + weapon.name
                     + " (Bonus attack: +" + weapon.attack + ")";
         }
         return msg;

@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class TitleChoiceHandler implements ActionListener {
+public class TitleButtonHandler implements ActionListener {
     private Game game;
 
-    public TitleChoiceHandler(Game game) {
+    public TitleButtonHandler(Game game) {
         this.game = game;
     }
 

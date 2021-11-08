@@ -2,9 +2,12 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameButtonPanel {
     private JPanel buttonPanel;
+    private List<GameButton> utilityButtonList;
     private GameButton choiceButton1;
     private GameButton choiceButton2;
     private GameButton choiceButton3;
@@ -23,7 +26,28 @@ public class GameButtonPanel {
         this.buttonPanel.add(choiceButton2.getButton());
         this.buttonPanel.add(choiceButton3.getButton());
         this.buttonPanel.add(choiceButton4.getButton());
-        this.buttonPanel.setLayout(new GridLayout(4,1));
+        this.buttonPanel.setLayout(new GridLayout(4, 1));
+    }
+
+    public GameButtonPanel(int numButton, int width, int height) {
+        this.buttonPanel = new JPanel();
+        this.buttonPanel.setBounds(0, 0, width, height);
+        this.buttonPanel.setBackground(Color.BLUE);
+        this.utilityButtonList = new ArrayList<>();
+        for (int i = 0; i < numButton; i++) {
+            GameButton gameButton = new GameButton("To be set#" + i);
+            this.utilityButtonList.add(gameButton);
+            this.buttonPanel.add(gameButton.getButton());
+        }
+        this.buttonPanel.setLayout(new GridLayout(2, numButton));
+    }
+
+    public List<GameButton> getUtilityButtonList() {
+        return utilityButtonList;
+    }
+
+    public GameButton getGameButtonFromList(int index) {
+        return this.utilityButtonList.get(index);
     }
 
     public JPanel getButtonPanel() {

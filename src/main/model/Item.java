@@ -31,4 +31,9 @@ public abstract class Item implements Writable {
         json.put("amount", this.amount);
         return json;
     }
+
+    @Override
+    public String toString() {
+        return this.name + " x1 \n";
+    }
 }
