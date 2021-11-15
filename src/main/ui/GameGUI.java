@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
-public class Game {
+public class GameGUI {
     public static final String JSON_STORE = "./data/pc.json";
     public static final Random RND = new Random();
 
@@ -17,12 +17,11 @@ public class Game {
     private UtilityWindow charStatusWindow;
     private UtilityWindow inventoryWindow;
     private PlayableCharacter pc;
-    private String option;
     private boolean gameOver;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    public Game() {
+    public GameGUI() {
         this.jsonWriter = new JsonWriter(JSON_STORE);
         this.jsonReader = new JsonReader(JSON_STORE);
         this.gameWindow = new GameWindow(this);
@@ -35,10 +34,21 @@ public class Game {
 
         this.inventoryWindow = new UtilityWindow(this);
         this.inventoryWindow.rightCentreOnScreen();
+
+        this.charStatusWindow.createCharInfoDisplay();
+        this.inventoryWindow.createInventoryDisplay();
     }
 
     public void reset() {
         this.gameWindow.displayTitleScreen(true);
+    }
+
+    private void updateDisplayWindow() {
+        this.charStatusWindow.updateDisplayText(
+                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
+                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
+        );
+        this.inventoryWindow.refreshInventoryDisplay();
     }
 
     public void startGame() {
@@ -46,8 +56,6 @@ public class Game {
         this.gameOver = false;
         createCharacter();
         runDungeon();
-        this.charStatusWindow.displayScreen(true);
-        this.inventoryWindow.displayScreen(true);
     }
 
     private void createCharacter() {
@@ -55,12 +63,7 @@ public class Game {
         playerName = JOptionPane.showInputDialog(
                 "Please enter your character Name");
         this.pc = new PlayableCharacter(playerName);
-        this.charStatusWindow.createDisplay();
-        this.charStatusWindow.updateDisplayText(
-                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
-                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
-        );
-        this.inventoryWindow.createDisplayList();
+        this.inventoryWindow.clearInventoryDisplay();
     }
 
     public void runDungeon() {
@@ -73,22 +76,18 @@ public class Game {
         this.gameWindow.getMainTextArea().addMessageToDisplay(this.pc.sense());
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 "[Tips: click HELP to get a detailed full list for most command buttons!]\n");
-
+        updateDisplayWindow();
+        this.gameOver = false;
     }
 
     public void loadGame() {
         try {
             this.pc = this.jsonReader.read();
-            this.charStatusWindow.createDisplay();
-            this.charStatusWindow.updateDisplayText(
-                    new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
-                            + new Command(Command.CHAR_STATUS, this.pc).chCommand()
-            );
-            this.inventoryWindow.createDisplayList();
-            this.inventoryWindow.addToDisplayList(this.pc.getInventory());
             JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
                     "Loaded " + this.pc.getName() + " from " + JSON_STORE + "\n");
             this.gameWindow.displayGameScreen(true);
+            this.inventoryWindow.clearInventoryDisplay();
+            this.inventoryWindow.addToInventoryDisplay(this.pc.getInventory());
             runDungeon();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
@@ -114,14 +113,12 @@ public class Game {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.move(moveCommand) + "\n");
         randomEvent();
-        this.charStatusWindow.updateDisplayText(
-                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
-                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
-        );
+        updateDisplayWindow();
         if (isOver()) {
             this.gameWindow.displayGameScreen(false);
             this.inventoryWindow.displayScreen(false);
             this.charStatusWindow.displayScreen(false);
+            this.gameWindow.getMainTextArea().clearDisplay();
             this.gameWindow.displayTitleScreen(true);
         }
     }
@@ -129,68 +126,60 @@ public class Game {
     public void useItem(Item item) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.use(item) + "\n");
-        this.charStatusWindow.updateDisplayText(
-                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
-                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
-        );
+        updateDisplayWindow();
     }
 
     public void equipItem(Item item) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.equip(item) + "\n");
-        this.charStatusWindow.updateDisplayText(
-                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
-                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
-        );
+        updateDisplayWindow();
     }
 
     public void showCharStatus() {
+        updateDisplayWindow();
         this.charStatusWindow.displayScreen(true);
     }
 
     public void showInventory() {
+        updateDisplayWindow();
         this.inventoryWindow.displayScreen(true);
+    }
+
+    public void showCommandList() {
+        JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                Command.COMMAND_LIST);
     }
 
     // EFFECTS:  Create random events while user moves
     private void randomEvent() {
         int eventNum = RND.nextInt(10);
-        Item item;
+        String msg = "";
         switch (eventNum) {
             case 0:
-                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
-                        "You found a potion!" + "\n");
-                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a potion!" + "\n");
-                item = new Potion("Potion");
-                this.pc.add(item);
-                this.inventoryWindow.addToDisplayList(item);
+                msg = randomEventFoundItem(new Potion("Potion"));
                 break;
             case 1:
-                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
-                        "You found a iron sword!" + "\n");
-                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a iron sword!" + "\n");
-                item = new Weapon("Iron Sword", 2, 0);
-                this.pc.add(item);
-                this.inventoryWindow.addToDisplayList(item);
+                msg = randomEventFoundItem(new Weapon("Iron Sword", 2, 0));
                 break;
             case 2:
-                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
-                        "You found a rusted sword!" + "\n");
-                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a rusted sword!" + "\n");
-                item = new Weapon("Rusted Sword", 1, 0);
-                this.pc.add(item);
-                this.inventoryWindow.addToDisplayList(item);
+                msg = randomEventFoundItem(new Weapon("Rusted Sword", 1, 0));
                 break;
-            case 3:
-            case 4:
             case 5:
-                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
-                        "The ground was so wet and you slip down! It hurt so bad." + "\n");
-                this.gameWindow.getMainTextArea().addMessageToDisplay(
-                        "The ground was so wet and you slip down! It hurt so bad." + "\n");
+                msg = "The ground was so wet and you slip down! It hurt so bad." + "\n";
                 this.pc.setHitPoint(this.pc.getHitPoint() - 1);
                 break;
+            default:
+                return;
         }
+        JOptionPane.showMessageDialog(this.gameWindow.getWindow(), msg);
+        this.gameWindow.getMainTextArea().addMessageToDisplay(msg);
+    }
+
+    private String randomEventFoundItem(Item item) {
+        String msg = "You found a " + item.getName() + "!\n";
+        this.pc.add(item);
+        this.inventoryWindow.addToInventoryDisplay(item);
+        return msg;
     }
 
     // Is game over?
@@ -214,13 +203,10 @@ public class Game {
      * Play the game in console
      */
     public static void main(String[] args) {
-        new Game().reset();
+        new GameGUI().reset();
     }
 
-    public void showCommandList() {
-        JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
-                Command.COMMAND_LIST);
-    }
+
 }
 
 

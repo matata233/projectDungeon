@@ -12,7 +12,7 @@ public class GameWindow {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
 
-    private Game game;
+    private GameGUI gameGUI;
 
     private JFrame window;
     private Container mainDisplay;
@@ -29,8 +29,8 @@ public class GameWindow {
     private TitleButtonHandler titleButtonHandler;
     private GameButtonHandler gameButtonHandler;
 
-    public GameWindow(Game game) {
-        this.game = game;
+    public GameWindow(GameGUI gameGUI) {
+        this.gameGUI = gameGUI;
         this.window = new JFrame();
         this.window.setSize(this.WIDTH, this.HEIGHT);
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,8 +39,8 @@ public class GameWindow {
         this.window.setVisible(true);
 
         this.mainDisplay = this.window.getContentPane();
-        this.titleButtonHandler = new TitleButtonHandler(this.game);
-        this.gameButtonHandler = new GameButtonHandler(this.game);
+        this.titleButtonHandler = new TitleButtonHandler(this.gameGUI);
+        this.gameButtonHandler = new GameButtonHandler(this.gameGUI);
         this.centreOnScreen();
     }
 
@@ -49,7 +49,8 @@ public class GameWindow {
     // effects:  location of frame is set so frame is centred on desktop
     private void centreOnScreen() {
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        this.window.setLocation((screen.width - this.window.getWidth()) / 2, (screen.height - this.window.getHeight()) / 2);
+        this.window.setLocation(
+                (screen.width - this.window.getWidth()) / 2, (screen.height - this.window.getHeight()) / 2);
     }
 
     public void createTitleScreen() {
@@ -76,7 +77,29 @@ public class GameWindow {
         displayTitleScreen(false);
         this.mainTextPanel = new GameDisplayPanel("", this.BASE_FONT);
         this.mainTextArea = new GameDisplayTextArea("Welcome to Dungeon Adventure!\n");
+        createMainButtonPanel();
+        createUtilityButtonPanel();
+        this.mainTextPanel.getDisplayPanel().add(this.mainTextArea.getDisplayScrollPane());
+        this.mainDisplay.add(this.mainTextPanel.getDisplayPanel());
+        this.mainDisplay.add(this.mainButtonPanel.getButtonPanel());
+        this.mainDisplay.add(this.utilityButtonPanel.getButtonPanel());
+    }
 
+    private void createUtilityButtonPanel() {
+        this.utilityButtonPanel = new GameButtonPanel(6, 800, 100);
+        this.utilityButtonPanel.getGameButtonFromList(0).getButton().setText(Command.CHAR_STATUS);
+        this.utilityButtonPanel.getGameButtonFromList(1).getButton().setText(Command.INVENTORY_LIST);
+        this.utilityButtonPanel.getGameButtonFromList(2).getButton().setText(Command.SAVE);
+        this.utilityButtonPanel.getGameButtonFromList(3).getButton().setText(Command.LOAD);
+        this.utilityButtonPanel.getGameButtonFromList(4).getButton().setText(Command.EXIT);
+        this.utilityButtonPanel.getGameButtonFromList(5).getButton().setText(Command.HELP);
+        for (GameButton gameButton :
+                this.utilityButtonPanel.getUtilityButtonList()) {
+            gameButton.getButton().addActionListener(new GameButtonHandler(this.gameGUI));
+        }
+    }
+
+    private void createMainButtonPanel() {
         this.mainButtonPanel = new GameButtonPanel(
                 Command.MOVE_NORTH, Command.MOVE_SOUTH, Command.MOVE_WEST, Command.MOVE_EAST);
         this.mainButtonPanel.getChoiceButton1().getButton().addActionListener(
@@ -87,25 +110,6 @@ public class GameWindow {
                 this.gameButtonHandler);
         this.mainButtonPanel.getChoiceButton4().getButton().addActionListener(
                 this.gameButtonHandler);
-
-        this.utilityButtonPanel = new GameButtonPanel(6, 800, 100);
-        this.utilityButtonPanel.getGameButtonFromList(0).getButton().setText(Command.CHAR_STATUS);
-        this.utilityButtonPanel.getGameButtonFromList(1).getButton().setText(Command.INVENTORY_LIST);
-//        this.utilityButtonPanel.getGameButtonFromList(2).getButton().setText(Command.GET_LOCATION);
-//        this.utilityButtonPanel.getGameButtonFromList(3).getButton().setText(Command.USE);
-//        this.utilityButtonPanel.getGameButtonFromList(4).getButton().setText(Command.EQUIP);
-        this.utilityButtonPanel.getGameButtonFromList(2).getButton().setText(Command.SAVE);
-        this.utilityButtonPanel.getGameButtonFromList(3).getButton().setText(Command.LOAD);
-        this.utilityButtonPanel.getGameButtonFromList(4).getButton().setText(Command.EXIT);
-        this.utilityButtonPanel.getGameButtonFromList(5).getButton().setText(Command.HELP);
-        for (GameButton gameButton :
-                this.utilityButtonPanel.getUtilityButtonList()) {
-            gameButton.getButton().addActionListener(new GameButtonHandler(this.game));
-        }
-        this.mainTextPanel.getDisplayPanel().add(this.mainTextArea.getDisplayScrollPane());
-        this.mainDisplay.add(this.mainTextPanel.getDisplayPanel());
-        this.mainDisplay.add(this.mainButtonPanel.getButtonPanel());
-        this.mainDisplay.add(this.utilityButtonPanel.getButtonPanel());
     }
 
     public void displayGameScreen(boolean isDisplay) {
@@ -117,14 +121,6 @@ public class GameWindow {
 
     public GameDisplayTextArea getMainTextArea() {
         return mainTextArea;
-    }
-
-    public GameButtonPanel getTitleButtonPanel() {
-        return titleButtonPanel;
-    }
-
-    public GameButtonPanel getMainButtonPanel() {
-        return mainButtonPanel;
     }
 
     public JFrame getWindow() {

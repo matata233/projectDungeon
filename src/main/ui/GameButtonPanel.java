@@ -17,7 +17,7 @@ public class GameButtonPanel {
             String buttonName1, String buttonName2, String buttonName3, String buttonName4) {
         this.buttonPanel = new JPanel();
         this.buttonPanel.setBounds(300, 400, 200, 100);
-        this.buttonPanel.setBackground(Color.BLUE);
+        this.buttonPanel.setBackground(Color.BLACK);
         this.choiceButton1 = new GameButton(buttonName1);
         this.choiceButton2 = new GameButton(buttonName2);
         this.choiceButton3 = new GameButton(buttonName3);
@@ -32,7 +32,7 @@ public class GameButtonPanel {
     public GameButtonPanel(int numButton, int width, int height) {
         this.buttonPanel = new JPanel();
         this.buttonPanel.setBounds(0, 0, width, height);
-        this.buttonPanel.setBackground(Color.BLUE);
+        this.buttonPanel.setBackground(Color.BLACK);
         this.utilityButtonList = new ArrayList<>();
         for (int i = 0; i < numButton; i++) {
             GameButton gameButton = new GameButton("To be set#" + i);

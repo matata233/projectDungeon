@@ -2,16 +2,14 @@ package ui;
 
 import model.Command;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class TitleButtonHandler implements ActionListener {
-    private Game game;
+    private GameGUI gameGUI;
 
-    public TitleButtonHandler(Game game) {
-        this.game = game;
+    public TitleButtonHandler(GameGUI gameGUI) {
+        this.gameGUI = gameGUI;
     }
 
     @Override
@@ -19,10 +17,10 @@ public class TitleButtonHandler implements ActionListener {
         String choice = e.getActionCommand();
         switch (choice) {
             case Command.NEW_GAME:
-                this.game.startGame();
+                this.gameGUI.startGame();
                 break;
             case Command.LOAD:
-                this.game.loadGame();
+                this.gameGUI.loadGame();
                 break;
             case Command.EXIT:
                 System.exit(0);

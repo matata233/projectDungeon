@@ -11,18 +11,18 @@ public class UtilityWindow {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 600;
 
-    private Game game;
+    private GameGUI gameGUI;
     private JFrame utilityWindow;
-    private JPanel displayContent;
-    private JScrollPane displayContentWithScroll;
+    private JPanel displayPanel;
+    private JScrollPane displayPanelWithScroll;
     private JTextArea displayTextArea;
     private GameDisplayList displayList;
     private GameButton equipButton;
     private GameButton useButton;
 
 
-    public UtilityWindow(Game game) {
-        this.game = game;
+    public UtilityWindow(GameGUI gameGUI) {
+        this.gameGUI = gameGUI;
         this.utilityWindow = new JFrame();
         this.utilityWindow.setSize(this.WIDTH, this.HEIGHT);
         this.utilityWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -52,11 +52,14 @@ public class UtilityWindow {
         this.utilityWindow.setVisible(isVisible);
     }
 
-    public void createDisplay() {
-        this.displayContent = new JPanel();
-        this.displayContent.setBounds(0, 0, this.WIDTH, this.HEIGHT);
-        this.displayContent.setBackground(Color.BLUE);
+    public void createCharInfoDisplay() {
+        createDisplayPanel(0, 0, this.WIDTH, this.HEIGHT);
+        createDisplayTextArea();
+        this.displayPanel.add(this.displayTextArea);
+        this.utilityWindow.add(this.displayPanel);
+    }
 
+    private void createDisplayTextArea() {
         this.displayTextArea = new JTextArea();
         this.displayTextArea.setBackground(Color.BLACK);
         this.displayTextArea.setForeground(Color.WHITE);
@@ -65,50 +68,63 @@ public class UtilityWindow {
         this.displayTextArea.setEditable(false);
         this.displayTextArea.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         this.displayTextArea.setFont(GameWindow.BASE_FONT);
-        this.displayContent.add(displayTextArea);
-        this.utilityWindow.add(displayContent);
+    }
+
+    private void createDisplayPanel(int x, int y, int width, int height) {
+        this.displayPanel = new JPanel();
+        this.displayPanel.setBounds(x, y, width, height);
+        this.displayPanel.setBackground(Color.BLACK);
     }
 
     public void updateDisplayText(String msg) {
         this.displayTextArea.setText(msg);
     }
 
-    public void createDisplayList() {
+    public void createInventoryDisplay() {
         this.displayList = new GameDisplayList();
-        this.displayContentWithScroll = new JScrollPane(this.displayList.getDisplayList());
-        this.displayContentWithScroll.setBounds(0, 0, this.WIDTH, this.HEIGHT - 100);
-        this.displayContentWithScroll.setBackground(Color.BLUE);
-
-        this.displayContent = new JPanel();
-        this.displayContent.setBounds(0, this.HEIGHT - 100, this.WIDTH, 100);
-        this.displayContent.setBackground(Color.BLUE);
-
+        createDisplayPanelWithScroll();
+        createDisplayPanel(0, this.HEIGHT - 100, this.WIDTH, 100);
         this.equipButton = new GameButton(Command.EQUIP);
         this.useButton = new GameButton(Command.USE);
+        addHandlersToInventoryDisplay();
+        this.displayPanel.add(this.equipButton.getButton());
+        this.displayPanel.add(this.useButton.getButton());
+
+        this.utilityWindow.add(this.displayPanelWithScroll);
+        this.utilityWindow.add(this.displayPanel);
+    }
+
+    private void addHandlersToInventoryDisplay() {
         this.equipButton.getButton().addActionListener(
-                new UseEquipButtonHandler(this.game, this.displayList, this.equipButton));
+                new UseEquipButtonHandler(this.gameGUI, this.displayList, this.equipButton));
         this.useButton.getButton().addActionListener(
-                new UseEquipButtonHandler(this.game, this.displayList, this.useButton));
+                new UseEquipButtonHandler(this.gameGUI, this.displayList, this.useButton));
 
         this.displayList.getDisplayList().addListSelectionListener(
                 new GameListSelectionHandler(this.displayList, useButton, equipButton));
-
-
-        this.displayContent.add(this.equipButton.getButton());
-        this.displayContent.add(this.useButton.getButton());
-
-        this.utilityWindow.add(this.displayContentWithScroll);
-        this.utilityWindow.add(this.displayContent);
-        this.utilityWindow.setVisible(true);
     }
 
-    public void addToDisplayList(Item item) {
+    private void createDisplayPanelWithScroll() {
+        this.displayPanelWithScroll = new JScrollPane(this.displayList.getDisplayList());
+        this.displayPanelWithScroll.setBounds(0, 0, this.WIDTH, this.HEIGHT - 100);
+        this.displayPanelWithScroll.setBackground(Color.BLACK);
+    }
+
+    public void addToInventoryDisplay(Item item) {
         this.displayList.getListModel().addElement(item);
     }
 
-    public void addToDisplayList(List<Item> itemList) {
+    public void addToInventoryDisplay(List<Item> itemList) {
         for (Item item : itemList) {
             this.displayList.getListModel().addElement(item);
         }
+    }
+
+    public void refreshInventoryDisplay() {
+        this.displayList.getDisplayList().ensureIndexIsVisible(this.displayList.getListModel().size());
+    }
+
+    public void clearInventoryDisplay() {
+        this.displayList.getListModel().clear();
     }
 }

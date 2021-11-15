@@ -7,17 +7,17 @@ public class GameDisplayPanel {
 
 
     private JPanel displayPanel;
-    private JLabel dipsplayLabel;
+    private JLabel displayLabel;
 
     public GameDisplayPanel(String displayContent, Font font) {
         this.displayPanel = new JPanel();
         this.displayPanel.setBounds(100, 100, 600, 300);
-        this.displayPanel.setBackground(Color.BLUE);
+        this.displayPanel.setBackground(Color.BLACK);
 
-        this.dipsplayLabel = new JLabel(displayContent);
-        this.dipsplayLabel.setForeground(Color.WHITE);
-        this.dipsplayLabel.setFont(font);
-        this.displayPanel.add(this.dipsplayLabel);
+        this.displayLabel = new JLabel(displayContent);
+        this.displayLabel.setForeground(Color.WHITE);
+        this.displayLabel.setFont(font);
+        this.displayPanel.add(this.displayLabel);
     }
 
     public JPanel getDisplayPanel() {

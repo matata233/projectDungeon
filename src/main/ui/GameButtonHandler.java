@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameButtonHandler implements ActionListener {
-    private Game game;
+    private GameGUI gameGUI;
 
-    public GameButtonHandler(Game game) {
-        this.game = game;
+    public GameButtonHandler(GameGUI gameGUI) {
+        this.gameGUI = gameGUI;
     }
 
     @Override
@@ -17,16 +17,16 @@ public class GameButtonHandler implements ActionListener {
         String choice = e.getActionCommand();
         switch (choice) {
             case Command.MOVE_NORTH:
-                this.game.movePlayer(Command.MOVE_NORTH);
+                this.gameGUI.movePlayer(Command.MOVE_NORTH);
                 break;
             case Command.MOVE_SOUTH:
-                this.game.movePlayer(Command.MOVE_SOUTH);
+                this.gameGUI.movePlayer(Command.MOVE_SOUTH);
                 break;
             case Command.MOVE_WEST:
-                this.game.movePlayer(Command.MOVE_WEST);
+                this.gameGUI.movePlayer(Command.MOVE_WEST);
                 break;
             case Command.MOVE_EAST:
-                this.game.movePlayer(Command.MOVE_EAST);
+                this.gameGUI.movePlayer(Command.MOVE_EAST);
                 break;
             default:
                 actionPerformed(e, choice);
@@ -37,19 +37,19 @@ public class GameButtonHandler implements ActionListener {
     public void actionPerformed(ActionEvent e, String choice) {
         switch (choice) {
             case Command.CHAR_STATUS:
-                this.game.showCharStatus();
+                this.gameGUI.showCharStatus();
                 break;
             case Command.INVENTORY_LIST:
-                this.game.showInventory();
+                this.gameGUI.showInventory();
                 break;
             case Command.HELP:
-                this.game.showCommandList();
+                this.gameGUI.showCommandList();
                 break;
             case Command.SAVE:
-                this.game.saveGame();
+                this.gameGUI.saveGame();
                 break;
             case Command.LOAD:
-                this.game.loadGame();
+                this.gameGUI.loadGame();
                 break;
             case Command.EXIT:
                 System.exit(0);

@@ -1,9 +1,5 @@
 package ui;
 
-import model.Command;
-import model.Item;
-import model.Weapon;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,15 +21,6 @@ public class GameDisplayList {
     public JList getDisplayList() {
         return displayList;
     }
-
-    public void addItemToList(Item item) {
-        this.listModel.addElement(item);
-    }
-
-    public void removeItemFromList(Item item) {
-        this.listModel.removeElement(item);
-    }
-
 
     public DefaultListModel getListModel() {
         return listModel;

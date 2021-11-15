@@ -14,7 +14,7 @@ import java.util.Scanner;
 /*
  * Represents the main game application.
  */
-public class GameApp {
+public class GameConsole {
     private static final String JSON_STORE = "./data/pc.json";
     public static final int DUNGEON_SIZE = 5;
     public static final Random RND = new Random();
@@ -30,7 +30,7 @@ public class GameApp {
     private JsonReader jsonReader;
 
     // EFFECTS:  Constructs a dungeon Game with a 5x5 dungeon
-    public GameApp() {
+    public GameConsole() {
         this.dungeon = new ArrayList<>(DUNGEON_SIZE);
         for (List<String> colDungeon : this.dungeon) {
             this.dungeon.add(new ArrayList<>(DUNGEON_SIZE));
@@ -257,7 +257,7 @@ public class GameApp {
      * Play the game in console
      */
     public static void main(String[] args) {
-        GameApp gameApp = new GameApp();
-        gameApp.reset();
+        GameConsole gameConsole = new GameConsole();
+        gameConsole.reset();
     }
 }

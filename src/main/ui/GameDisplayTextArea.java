@@ -24,13 +24,13 @@ public class GameDisplayTextArea {
         scrollDown();
     }
 
+    public void clearDisplay() {
+        this.displayTextArea.setText("");
+    }
+
     //move to the bottom of text area
     private void scrollDown() {
         this.displayTextArea.setCaretPosition(this.displayTextArea.getText().length());
-    }
-
-    public JTextArea getDisplayTextArea() {
-        return displayTextArea;
     }
 
     public JScrollPane getDisplayScrollPane() {
