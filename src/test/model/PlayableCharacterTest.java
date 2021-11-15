@@ -142,9 +142,11 @@ class PlayableCharacterTest {
         //case: no input/random invalid input
         msg = "You seems unable to decide where to go. You take your time to think about it.";
         assertEquals(msg, this.pc.moveInConsole("ghjkk"));
+        assertEquals(msg, this.pc.moveInGUI("ghjkk"));
         assertEquals(2, this.pc.getPosX());
         assertEquals(2, this.pc.getPosY());
         assertEquals(msg, this.pc.moveInConsole(""));
+        assertEquals(msg, this.pc.moveInGUI(""));
         assertEquals(2, this.pc.getPosX());
         assertEquals(2, this.pc.getPosY());
     }

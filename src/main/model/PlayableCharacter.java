@@ -132,6 +132,7 @@ public class PlayableCharacter extends Character {
                 this.posX += 1;
                 break;
             default:
+                msg = "You seems unable to decide where to go. You take your time to think about it.";
         }
         if (isCollied()) {
             msg = "You tried to walk into a wall. What's wrong with me?";
