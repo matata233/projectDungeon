@@ -57,7 +57,7 @@ public class Command {
 
     // Initiate a move command
     // MODIFIES: this
-    // EFFECTS: Make the player move and return correspond message.
+    // EFFECTS: Make the player move and return correspond message to the console.
     public String moveCommandInConsole() {
         return this.playableCharacter.moveInConsole(this.command);
     }

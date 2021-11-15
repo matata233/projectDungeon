@@ -14,6 +14,12 @@ class PlayableCharacterTest {
     }
 
     @Test
+    void constructor() {
+        this.pc = new PlayableCharacter("");
+        assertEquals("nameless",this.pc.getName());
+    }
+
+    @Test
     void sense() {
         //case: (0,0)
         String testMsg = "";
