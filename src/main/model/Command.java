@@ -46,10 +46,10 @@ public class Command {
     // EFFECTS: Return true if it is 'w', 's', 'd', 's'
     //          Otherwise false
     public boolean isMoveCommand() {
-        if (this.command.length() == 1 && this.command.equalsIgnoreCase(MOVE_NORTH)
-                || this.command.equalsIgnoreCase(MOVE_SOUTH)
-                || this.command.equalsIgnoreCase(MOVE_WEST)
-                || this.command.equalsIgnoreCase(MOVE_EAST)) {
+        if (this.command.length() == 1 && this.command.equalsIgnoreCase("w")
+                || this.command.equalsIgnoreCase("s")
+                || this.command.equalsIgnoreCase("a")
+                || this.command.equalsIgnoreCase("d")) {
             return true;
         }
         return false;
@@ -58,8 +58,8 @@ public class Command {
     // Initiate a move command
     // MODIFIES: this
     // EFFECTS: Make the player move and return correspond message.
-    public String moveCommand() {
-        return this.playableCharacter.move(this.command);
+    public String moveCommandInConsole() {
+        return this.playableCharacter.moveInConsole(this.command);
     }
 
     // Initiate an equip command

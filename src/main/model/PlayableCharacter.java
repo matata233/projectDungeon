@@ -113,10 +113,10 @@ public class PlayableCharacter extends Character {
 
     // The character moves a single unit
     // MODIFIES: this
-    // EFFECTS: The character moves a single unit to indicated direction.
+    // EFFECTS: The character moves a single unit to indicated direction using GUI.
     //          If not moving out of bound, return "You moved onward."
     //          Otherwise, return "You tried to walk  into a wall. What's wrong with me?"
-    public String move(String userInput) {
+    public String moveInGUI(String userInput) {
         String msg = "You move onward.";
         switch (userInput) {
             case Command.MOVE_NORTH:
@@ -129,6 +129,35 @@ public class PlayableCharacter extends Character {
                 this.posX -= 1;
                 break;
             case Command.MOVE_EAST:
+                this.posX += 1;
+                break;
+            default:
+                msg = "You seems unable to decide where to go. You take your time to think about it.";
+        }
+        if (isCollied()) {
+            msg = "You tried to walk into a wall. What's wrong with me?";
+        }
+        return msg;
+    }
+
+    // The character moves a single unit
+    // MODIFIES: this
+    // EFFECTS: The character moves a single unit to indicated direction using console based UI.
+    //          If not moving out of bound, return "You moved onward."
+    //          Otherwise, return "You tried to walk  into a wall. What's wrong with me?"
+    public String moveInConsole(String userInput) {
+        String msg = "You move onward.";
+        switch (userInput) {
+            case "w":
+                this.posY -= 1;
+                break;
+            case "s":
+                this.posY += 1;
+                break;
+            case "a":
+                this.posX -= 1;
+                break;
+            case "d":
                 this.posX += 1;
                 break;
             default:

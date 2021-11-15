@@ -32,31 +32,31 @@ class CommandTest {
     }
 
     @Test
-    void moveCommand() {
+    void moveCommandInConsole() {
         this.playableCharacter.posX = 1;
         this.playableCharacter.posY = 1;
         String msg = "You move onward.";
         //case w
         this.command.setCommand("w");
-        assertEquals(msg, this.command.moveCommand());
+        assertEquals(msg, this.command.moveCommandInConsole());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(0, this.playableCharacter.posY);
 
         //case s
         this.command.setCommand("s");
-        assertEquals(msg, this.command.moveCommand());
+        assertEquals(msg, this.command.moveCommandInConsole());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
 
         //case a
         this.command.setCommand("a");
-        assertEquals(msg, this.command.moveCommand());
+        assertEquals(msg, this.command.moveCommandInConsole());
         assertEquals(0, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
 
         //case d
         this.command.setCommand("d");
-        assertEquals(msg, this.command.moveCommand());
+        assertEquals(msg, this.command.moveCommandInConsole());
         assertEquals(1, this.playableCharacter.posX);
         assertEquals(1, this.playableCharacter.posY);
 
@@ -104,12 +104,12 @@ class CommandTest {
     @Test
     void chCommand() {
         String msg = "";
-        msg += "Name:" + this.playableCharacter.name + "\n";
-        msg += "Attack: " + this.playableCharacter.attack + "\n";
-        msg += "Defence: " + this.playableCharacter.defence + "\n";
+        msg += "Name:" + this.playableCharacter.name + "\n\n";
+        msg += "Attack: " + this.playableCharacter.attack + "\n\n";
+        msg += "Defence: " + this.playableCharacter.defence + "\n\n";
         msg += "Current HP " + "/" + " Max HP: "
                 + this.playableCharacter.hitPoint + "/"
-                + PlayableCharacter.MAX_HITPOINT + "\n";
+                + PlayableCharacter.MAX_HITPOINT + "\n\n";
         msg += "Equipped gear: ";
         //case: empty main hand
         String testMsg = "none";
@@ -120,7 +120,7 @@ class CommandTest {
         this.playableCharacter.add(item);
         this.playableCharacter.equip(item);
         Weapon weapon = (Weapon) this.playableCharacter.mainHand.get(0);
-        testMsg = "\n" + weapon.name
+        testMsg = "\n\n" + weapon.name
                 + " (Bonus attack: +" + weapon.attack + ")";
         assertEquals(msg + testMsg, this.command.chCommand());
     }
@@ -142,7 +142,7 @@ class CommandTest {
 
     @Test
     void locCommand() {
-        assertEquals("You are at [" + this.playableCharacter.posX
+        assertEquals("Location: You are at [" + this.playableCharacter.posX
                 + ", " + this.playableCharacter.posY + "]", this.command.locCommand());
     }
 }

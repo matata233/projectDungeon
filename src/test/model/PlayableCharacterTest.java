@@ -108,29 +108,39 @@ class PlayableCharacterTest {
         assertEquals(0, this.pc.getPosX());
         assertEquals(0, this.pc.getPosY());
         //case: move north
-        assertEquals(colliedMsg, this.pc.move("w"));
+        assertEquals(colliedMsg, this.pc.moveInConsole("w"));
+        assertEquals(colliedMsg, this.pc.moveInGUI(Command.MOVE_NORTH));
         assertEquals(0, this.pc.getPosX());
         assertEquals(0, this.pc.getPosY());
         //case: move south
-        assertEquals(msg, this.pc.move("s"));
+        assertEquals(msg, this.pc.moveInConsole("s"));
         assertEquals(0, this.pc.getPosX());
         assertEquals(1, this.pc.getPosY());
+        assertEquals(msg, this.pc.moveInGUI(Command.MOVE_SOUTH));
+        assertEquals(0, this.pc.getPosX());
+        assertEquals(2, this.pc.getPosY());
         //case: move west
-        assertEquals(colliedMsg, this.pc.move("a"));
+        assertEquals(colliedMsg, this.pc.moveInConsole("a"));
         assertEquals(0, this.pc.getPosX());
-        assertEquals(1, this.pc.getPosY());
+        assertEquals(2, this.pc.getPosY());
+        assertEquals(colliedMsg, this.pc.moveInGUI(Command.MOVE_WEST));
+        assertEquals(0, this.pc.getPosX());
+        assertEquals(2, this.pc.getPosY());
         //case: move east
-        assertEquals(msg, this.pc.move("d"));
+        assertEquals(msg, this.pc.moveInConsole("d"));
         assertEquals(1, this.pc.getPosX());
-        assertEquals(1, this.pc.getPosY());
+        assertEquals(2, this.pc.getPosY());
+        assertEquals(msg, this.pc.moveInGUI(Command.MOVE_EAST));
+        assertEquals(2, this.pc.getPosX());
+        assertEquals(2, this.pc.getPosY());
         //case: no input/random invalid input
         msg = "You seems unable to decide where to go. You take your time to think about it.";
-        assertEquals(msg, this.pc.move("ghjkk"));
-        assertEquals(1, this.pc.getPosX());
-        assertEquals(1, this.pc.getPosY());
-        assertEquals(msg, this.pc.move(""));
-        assertEquals(1, this.pc.getPosX());
-        assertEquals(1, this.pc.getPosY());
+        assertEquals(msg, this.pc.moveInConsole("ghjkk"));
+        assertEquals(2, this.pc.getPosX());
+        assertEquals(2, this.pc.getPosY());
+        assertEquals(msg, this.pc.moveInConsole(""));
+        assertEquals(2, this.pc.getPosX());
+        assertEquals(2, this.pc.getPosY());
     }
 
     @Test

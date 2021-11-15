@@ -133,7 +133,7 @@ public class GameGUI {
     //          if game is over condition met, end game and return to the title screen
     public void runDungeon(String moveCommand) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
-                this.pc.move(moveCommand) + "\n");
+                this.pc.moveInGUI(moveCommand) + "\n");
         randomEvent();
         updateDisplayWindow();
         if (isOver()) {

@@ -129,7 +129,7 @@ public class GameConsole {
             userInput = sc.next().toLowerCase();
             Command userCommand = new Command(userInput, this.pc);
             if (userCommand.isMoveCommand()) {
-                System.out.println(userCommand.moveCommand());
+                System.out.println(userCommand.moveCommandInConsole());
                 randomEvent();
                 isOver();
             } else {
