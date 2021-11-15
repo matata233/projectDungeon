@@ -2,15 +2,16 @@ package ui;
 
 import model.Potion;
 
-import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+// Represents a Jlist selection handler for GameDisplayList
 public class GameListSelectionHandler implements ListSelectionListener {
     GameDisplayList gameDisplayList;
     GameButton useButton;
     GameButton equipButton;
 
+    // EFFECTS: Create a handler with given GameDisplayList, GameButtons
     public GameListSelectionHandler(GameDisplayList gameDisplayList, GameButton useButton, GameButton equipButton) {
         this.gameDisplayList = gameDisplayList;
         this.useButton = useButton;
@@ -19,7 +20,9 @@ public class GameListSelectionHandler implements ListSelectionListener {
     }
 
     @Override
-    //This method is required by ListSelectionListener.
+    // This method is required by ListSelectionListener.
+    // MODIFIES: this
+    // EFFECTS: Enable or disable the use of button based on selected item type
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             if (this.gameDisplayList.getDisplayList().getSelectedIndex() == -1) {

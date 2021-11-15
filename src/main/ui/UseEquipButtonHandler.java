@@ -7,11 +7,13 @@ import model.Weapon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents use/equip button handler in the inventory list window
 public class UseEquipButtonHandler implements ActionListener {
     GameGUI gameGUI;
     GameButton gameButton;
     GameDisplayList gameDisplayList;
 
+    // EFFECTS: Create a button handler with given GameGUI, GameDisplayList, Use and Equip buttons
     public UseEquipButtonHandler(GameGUI gameGUI, GameDisplayList gameDisplayList, GameButton gameButton) {
         this.gameGUI = gameGUI;
         this.gameDisplayList = gameDisplayList;
@@ -19,6 +21,8 @@ public class UseEquipButtonHandler implements ActionListener {
     }
 
     @Override
+    // EFFECTS: Performed actions regarding the name of the button,
+    //          corresponding to the type of the item, the size of the GameDisplayList
     public void actionPerformed(ActionEvent e) {
         int index = this.gameDisplayList.getDisplayList().getSelectedIndex();
         int size = this.gameDisplayList.getListModel().getSize();

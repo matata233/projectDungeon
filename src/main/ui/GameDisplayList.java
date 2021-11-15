@@ -3,10 +3,12 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents a Jlist in the utility window
 public class GameDisplayList {
     private JList displayList;
     private DefaultListModel listModel;
 
+    // EFFECTS: Create an empty vertical display Jlist
     public GameDisplayList() {
         this.listModel = new DefaultListModel();
         this.displayList = new JList(this.listModel);

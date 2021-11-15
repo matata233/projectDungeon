@@ -5,6 +5,7 @@ import model.Command;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents a JFrame of the main game window
 public class GameWindow {
     public static final Font TITLE_FONT = new Font("Times New Roman", Font.PLAIN, 50);
     public static final Font BASE_FONT = new Font("Times New Roman", Font.PLAIN, 20);
@@ -29,6 +30,7 @@ public class GameWindow {
     private TitleButtonHandler titleButtonHandler;
     private GameButtonHandler gameButtonHandler;
 
+    // EFFECTS: Create a main game window with given GameGUI
     public GameWindow(GameGUI gameGUI) {
         this.gameGUI = gameGUI;
         this.window = new JFrame();
@@ -44,15 +46,16 @@ public class GameWindow {
         this.centreOnScreen();
     }
 
+    // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
     // Centres frame on desktop
-    // modifies: this
-    // effects:  location of frame is set so frame is centred on desktop
+    // MODIFIES: this
+    // EFFECTS:  Location of frame is set so frame is centred on desktop
     private void centreOnScreen() {
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        this.window.setLocation(
-                (screen.width - this.window.getWidth()) / 2, (screen.height - this.window.getHeight()) / 2);
+        this.window.setLocationRelativeTo(null);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Create the title screen
     public void createTitleScreen() {
         this.titlePanel = new GameDisplayPanel("DUNGEON ADVENTURE", this.TITLE_FONT);
         this.titleButtonPanel = new GameButtonPanel(Command.NEW_GAME, Command.LOAD, Command.EXIT, null);
@@ -68,11 +71,15 @@ public class GameWindow {
         this.mainDisplay.add(this.titleButtonPanel.getButtonPanel());
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Display the title screen
     public void displayTitleScreen(boolean isDisplay) {
         this.titlePanel.getDisplayPanel().setVisible(isDisplay);
         this.titleButtonPanel.getButtonPanel().setVisible(isDisplay);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Create the main game screen
     public void createGameScreen() {
         displayTitleScreen(false);
         this.mainTextPanel = new GameDisplayPanel("", this.BASE_FONT);
@@ -85,6 +92,8 @@ public class GameWindow {
         this.mainDisplay.add(this.utilityButtonPanel.getButtonPanel());
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Create a set of utility buttons in the main game screen
     private void createUtilityButtonPanel() {
         this.utilityButtonPanel = new GameButtonPanel(6, 800, 100);
         this.utilityButtonPanel.getGameButtonFromList(0).getButton().setText(Command.CHAR_STATUS);
@@ -99,6 +108,8 @@ public class GameWindow {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Create a set of four main movement buttons in the main game screen
     private void createMainButtonPanel() {
         this.mainButtonPanel = new GameButtonPanel(
                 Command.MOVE_NORTH, Command.MOVE_SOUTH, Command.MOVE_WEST, Command.MOVE_EAST);
@@ -112,6 +123,8 @@ public class GameWindow {
                 this.gameButtonHandler);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Display the main game screen
     public void displayGameScreen(boolean isDisplay) {
         this.mainButtonPanel.getButtonPanel().setVisible(isDisplay);
         this.mainTextPanel.getDisplayPanel().setVisible(isDisplay);

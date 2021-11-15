@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a panel which contains buttons in the main game window
 public class GameButtonPanel {
     private JPanel buttonPanel;
     private List<GameButton> utilityButtonList;
@@ -13,6 +14,7 @@ public class GameButtonPanel {
     private GameButton choiceButton3;
     private GameButton choiceButton4;
 
+    // EFFECTS: Create a panel with four buttons with given button names
     public GameButtonPanel(
             String buttonName1, String buttonName2, String buttonName3, String buttonName4) {
         this.buttonPanel = new JPanel();
@@ -29,6 +31,8 @@ public class GameButtonPanel {
         this.buttonPanel.setLayout(new GridLayout(4, 1));
     }
 
+    // EFFECTS: Create a panel with given number of buttons
+    //          set the size of panel with given width and height
     public GameButtonPanel(int numButton, int width, int height) {
         this.buttonPanel = new JPanel();
         this.buttonPanel.setBounds(0, 0, width, height);
