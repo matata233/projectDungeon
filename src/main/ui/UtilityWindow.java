@@ -2,12 +2,10 @@ package ui;
 
 import model.Command;
 import model.Item;
-import model.Potion;
-import model.Weapon;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
+import java.util.List;
 
 public class UtilityWindow {
     private static final int WIDTH = 400;
@@ -77,9 +75,6 @@ public class UtilityWindow {
 
     public void createDisplayList() {
         this.displayList = new GameDisplayList();
-//        this.displayList.addItemToList(new Weapon("test1", 1, 0));
-//        this.displayList.addItemToList(new Weapon("test2", 1, 0));
-//        this.displayList.addItemToList(new Potion("test potion"));
         this.displayContentWithScroll = new JScrollPane(this.displayList.getDisplayList());
         this.displayContentWithScroll.setBounds(0, 0, this.WIDTH, this.HEIGHT - 100);
         this.displayContentWithScroll.setBackground(Color.BLUE);
@@ -105,5 +100,15 @@ public class UtilityWindow {
         this.utilityWindow.add(this.displayContentWithScroll);
         this.utilityWindow.add(this.displayContent);
         this.utilityWindow.setVisible(true);
+    }
+
+    public void addToDisplayList(Item item) {
+        this.displayList.getListModel().addElement(item);
+    }
+
+    public void addToDisplayList(List<Item> itemList) {
+        for (Item item : itemList) {
+            this.displayList.getListModel().addElement(item);
+        }
     }
 }

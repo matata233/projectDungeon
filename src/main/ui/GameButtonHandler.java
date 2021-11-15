@@ -43,13 +43,16 @@ public class GameButtonHandler implements ActionListener {
                 this.game.showInventory();
                 break;
             case Command.HELP:
-                //this.game.showCommandList(Command.HELP);
+                this.game.showCommandList();
                 break;
             case Command.SAVE:
                 this.game.saveGame();
                 break;
             case Command.LOAD:
                 this.game.loadGame();
+                break;
+            case Command.EXIT:
+                System.exit(0);
                 break;
         }
     }

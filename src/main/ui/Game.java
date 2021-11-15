@@ -1,8 +1,6 @@
 package ui;
 
-import model.Command;
-import model.Item;
-import model.PlayableCharacter;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -63,7 +61,6 @@ public class Game {
                         + new Command(Command.CHAR_STATUS, this.pc).chCommand()
         );
         this.inventoryWindow.createDisplayList();
-
     }
 
     public void runDungeon() {
@@ -81,7 +78,14 @@ public class Game {
 
     public void loadGame() {
         try {
-            this.pc = jsonReader.read();
+            this.pc = this.jsonReader.read();
+            this.charStatusWindow.createDisplay();
+            this.charStatusWindow.updateDisplayText(
+                    new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
+                            + new Command(Command.CHAR_STATUS, this.pc).chCommand()
+            );
+            this.inventoryWindow.createDisplayList();
+            this.inventoryWindow.addToDisplayList(this.pc.getInventory());
             JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
                     "Loaded " + this.pc.getName() + " from " + JSON_STORE + "\n");
             this.gameWindow.displayGameScreen(true);
@@ -109,16 +113,35 @@ public class Game {
     public void movePlayer(String moveCommand) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.move(moveCommand) + "\n");
+        randomEvent();
+        this.charStatusWindow.updateDisplayText(
+                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
+                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
+        );
+        if (isOver()) {
+            this.gameWindow.displayGameScreen(false);
+            this.inventoryWindow.displayScreen(false);
+            this.charStatusWindow.displayScreen(false);
+            this.gameWindow.displayTitleScreen(true);
+        }
     }
 
     public void useItem(Item item) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.use(item) + "\n");
+        this.charStatusWindow.updateDisplayText(
+                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
+                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
+        );
     }
 
     public void equipItem(Item item) {
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 this.pc.equip(item) + "\n");
+        this.charStatusWindow.updateDisplayText(
+                new Command(Command.GET_LOCATION, this.pc).locCommand() + "\n\n"
+                        + new Command(Command.CHAR_STATUS, this.pc).chCommand()
+        );
     }
 
     public void showCharStatus() {
@@ -129,6 +152,64 @@ public class Game {
         this.inventoryWindow.displayScreen(true);
     }
 
+    // EFFECTS:  Create random events while user moves
+    private void randomEvent() {
+        int eventNum = RND.nextInt(10);
+        Item item;
+        switch (eventNum) {
+            case 0:
+                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                        "You found a potion!" + "\n");
+                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a potion!" + "\n");
+                item = new Potion("Potion");
+                this.pc.add(item);
+                this.inventoryWindow.addToDisplayList(item);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                        "You found a iron sword!" + "\n");
+                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a iron sword!" + "\n");
+                item = new Weapon("Iron Sword", 2, 0);
+                this.pc.add(item);
+                this.inventoryWindow.addToDisplayList(item);
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                        "You found a rusted sword!" + "\n");
+                this.gameWindow.getMainTextArea().addMessageToDisplay("You found a rusted sword!" + "\n");
+                item = new Weapon("Rusted Sword", 1, 0);
+                this.pc.add(item);
+                this.inventoryWindow.addToDisplayList(item);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                        "The ground was so wet and you slip down! It hurt so bad." + "\n");
+                this.gameWindow.getMainTextArea().addMessageToDisplay(
+                        "The ground was so wet and you slip down! It hurt so bad." + "\n");
+                this.pc.setHitPoint(this.pc.getHitPoint() - 1);
+                break;
+        }
+    }
+
+    // Is game over?
+    // EFFECTS: returns true if game is over, false otherwise
+    private boolean isOver() {
+        if (this.pc.getPosX() == 2 && this.pc.getPosY() == 2) {
+            gameOver = true;
+            JOptionPane.showMessageDialog(this.gameWindow.getWindow(), "You found the exit!\n\n" + "Congratulations!");
+        } else if (this.pc.getHitPoint() <= 0) {
+            gameOver = true;
+            JOptionPane.showMessageDialog(this.gameWindow.getWindow(), "You become unconscious...\n");
+        }
+        return gameOver;
+    }
+
+    public PlayableCharacter getPc() {
+        return pc;
+    }
+
     /*
      * Play the game in console
      */
@@ -136,8 +217,9 @@ public class Game {
         new Game().reset();
     }
 
-    public PlayableCharacter getPc() {
-        return pc;
+    public void showCommandList() {
+        JOptionPane.showMessageDialog(this.gameWindow.getWindow(),
+                Command.COMMAND_LIST);
     }
 }
 

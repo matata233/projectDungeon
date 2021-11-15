@@ -123,7 +123,7 @@ public class Command {
     // Initiate a command that display the player's current location in [X,Y].
     // EFFECTS: Return a string of the current location
     public String locCommand() {
-        return "You are at [" + this.playableCharacter.posX
+        return "Location: You are at [" + this.playableCharacter.posX
                 + ", " + this.playableCharacter.posY + "]";
     }
 

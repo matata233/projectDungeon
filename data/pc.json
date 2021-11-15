@@ -1,6 +1,6 @@
 {
     "posX": 3,
-    "posY": 0,
+    "posY": 3,
     "mainHand": [{
         "amount": 1,
         "defence": 0,
@@ -9,12 +9,24 @@
     }],
     "defence": 0,
     "attack": 1,
-    "name": "JJ",
-    "hitPoint": 7,
-    "inventory": [{
-        "amount": 1,
-        "defence": 0,
-        "attack": 2,
-        "name": "Iron Sword"
-    }]
+    "name": "nameless",
+    "hitPoint": 5,
+    "inventory": [
+        {
+            "amount": 1,
+            "name": "Potion"
+        },
+        {
+            "amount": 1,
+            "defence": 0,
+            "attack": 2,
+            "name": "Iron Sword"
+        },
+        {
+            "amount": 1,
+            "defence": 0,
+            "attack": 2,
+            "name": "Iron Sword"
+        }
+    ]
 }
