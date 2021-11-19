@@ -84,6 +84,7 @@ public class GameGUI {
     // MODIFIES: this
     // EFFECTS:  Display welcome information once the game is started
     public void initializeDungeon() {
+        this.gameWindow.getMainTextArea().clearDisplay();
         this.gameWindow.getMainTextArea().addMessageToDisplay(
                 "Dungeon description to be added\n");
         this.gameWindow.getMainTextArea().addMessageToDisplay(
@@ -238,7 +239,8 @@ public class GameGUI {
         return gameOver;
     }
 
-    //Source of the image: https://www.ifanr.com/app/1084187
+    // Source of the code: https://stackoverflow.com/questions/15258467/java-how-can-i-popup-a-dialog-box-as-only-an-image
+    // Source of the image: https://www.ifanr.com/app/1084187
     // EFFECTS: Pop a game over an image when game is ended
     private void addPopUpImage() throws IOException {
         BufferedImage image = ImageIO.read(new File("./data/0-hp.png"));
