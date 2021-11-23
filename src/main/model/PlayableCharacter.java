@@ -68,7 +68,7 @@ public class PlayableCharacter extends Character {
     public String add(Item item) {
         String msg = "You found " + item.amount + " " + item.getName();
         this.inventory.add(item);
-        EventLog.getInstance().logEvent(new Event(item.getName() + " has been add to player's inventory."));
+        EventLog.getInstance().logEvent(new Event(item.getName() + " has been added to player's inventory."));
         return msg;
     }
 

@@ -30,3 +30,45 @@
 - As a player, I want to loot an item ((add a thing to my inventory)
 - As a player, I want to save my progress of the game to file
 - As a player, I want to load my past progress and continue the game
+
+## Phase 4: Task 2
+- Sample Event Log
+
+Mon Nov 22 16:21:20 PST 2021 
+Rusted Sword has been added to player's inventory.
+
+
+Mon Nov 22 16:21:30 PST 2021
+Iron Sword has been added to player's inventory.
+
+
+Mon Nov 22 16:21:34 PST 2021
+Iron Sword has been removed from player's inventory.
+
+
+Mon Nov 22 16:21:34 PST 2021
+Iron Sword has been added to player's main hand.
+
+
+Mon Nov 22 16:21:38 PST 2021
+Iron Sword has been removed from player's main hand.
+
+
+Mon Nov 22 16:21:38 PST 2021
+Iron Sword has been added to player's inventory.
+
+
+Mon Nov 22 16:21:38 PST 2021
+Rusted Sword has been removed from player's inventory.
+
+
+Mon Nov 22 16:21:38 PST 2021
+Rusted Sword has been added to player's main hand.
+
+
+Mon Nov 22 16:21:42 PST 2021
+Iron Sword has been added to player's inventory.
+
+
+Mon Nov 22 16:21:44 PST 2021
+Iron Sword has been added to player's inventory.
