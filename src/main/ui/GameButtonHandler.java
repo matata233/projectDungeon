@@ -1,6 +1,8 @@
 package ui;
 
 import model.Command;
+import model.EventLog;
+import model.EventLogPrinter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,6 +62,7 @@ public class GameButtonHandler implements ActionListener {
                 this.gameGUI.loadGame();
                 break;
             case Command.EXIT:
+                new EventLogPrinter().printLog(EventLog.getInstance());
                 System.exit(0);
                 break;
         }

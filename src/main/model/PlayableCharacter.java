@@ -68,6 +68,7 @@ public class PlayableCharacter extends Character {
     public String add(Item item) {
         String msg = "You found " + item.amount + " " + item.getName();
         this.inventory.add(item);
+        EventLog.getInstance().logEvent(new Event(item.getName() + " has been add to player's inventory."));
         return msg;
     }
 
@@ -83,12 +84,20 @@ public class PlayableCharacter extends Character {
             //if (item instanceof Weapon) {
             if (!this.mainHand.isEmpty()) {
                 Item ogItem = this.mainHand.remove(0);
+                EventLog.getInstance().logEvent(
+                        new Event(ogItem.getName() + " has been removed from player's main hand."));
                 this.inventory.add(ogItem);
+                EventLog.getInstance().logEvent(
+                        new Event(ogItem.getName() + " has been added to player's inventory."));
                 msg += "\nYou put your " + ogItem.name + " back to your backpack.";
                 //    }
             }
             this.inventory.remove(item);
+            EventLog.getInstance().logEvent(
+                    new Event(item.getName() + " has been removed from player's inventory."));
             this.mainHand.add(item);
+            EventLog.getInstance().logEvent(
+                    new Event(item.getName() + " has been added to player's main hand."));
         }
         return msg;
     }
@@ -103,6 +112,7 @@ public class PlayableCharacter extends Character {
             msg = "Huh? What am I doing...? Trying to eat the " + item.getName() + " ?";
         } else {
             this.inventory.remove(item);
+            EventLog.getInstance().logEvent(new Event(item.getName() + " has been removed from player's inventory."));
             msg = item.effect();
             //if (item instanceof Potion) {
             this.setHitPoint(this.hitPoint += 3);

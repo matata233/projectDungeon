@@ -50,6 +50,7 @@ public class GameButtonPanel {
         return utilityButtonList;
     }
 
+    // EFFECTS: Return the specific button from the button list
     public GameButton getGameButtonFromList(int index) {
         return this.utilityButtonList.get(index);
     }

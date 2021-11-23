@@ -259,5 +259,6 @@ public class GameConsole {
     public static void main(String[] args) {
         GameConsole gameConsole = new GameConsole();
         gameConsole.reset();
+        new EventLogPrinter().printLog(EventLog.getInstance());
     }
 }
