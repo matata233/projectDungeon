@@ -111,6 +111,8 @@ public class JsonReader {
             item = new Potion(name);
             inventory.add(item);
         }
+        EventLog.getInstance().logEvent(
+                new Event(item.getName() + " has been added to player's inventory."));
     }
 
 
@@ -122,5 +124,7 @@ public class JsonReader {
         int def = jsonObject.getInt("defence");
         Item weapon = new Weapon(name, atk, def);
         mainHand.add(weapon);
+        EventLog.getInstance().logEvent(
+                new Event(weapon.getName() + " has been added to player's main hand."));
     }
 }
