@@ -5,7 +5,8 @@ import java.util.Date;
 
 
 /**
- * Represents an alarm system event.
+ * Source of the code: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+ * Represents a Dungeon Adventure event.
  */
 public class Event {
     private static final int HASH_CONSTANT = 13;
