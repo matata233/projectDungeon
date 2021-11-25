@@ -66,6 +66,9 @@ public class JsonReader {
         int posY = jsonObject.getInt("posY");
         List<Item> inventory = new ArrayList<>();
         List<Item> mainHand = new ArrayList<>();
+        EventLog.getInstance().logEvent(
+                new Event(
+                        "Reset inventory and main hand to initial status. Loaded new character's file. "));
         addInventory(inventory, jsonObject);
         addMainHand(mainHand, jsonObject);
         PlayableCharacter pc = new PlayableCharacter(name, attack, defence, hitPoint, posX, posY,
