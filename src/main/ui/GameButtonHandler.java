@@ -2,7 +2,6 @@ package ui;
 
 import model.Command;
 import model.EventLog;
-import model.EventLogPrinter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

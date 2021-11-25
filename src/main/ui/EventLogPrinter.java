@@ -1,4 +1,7 @@
-package model;
+package ui;
+
+import model.Event;
+import model.EventLog;
 
 // Represents a printer for printing event log on console
 public class EventLogPrinter {
