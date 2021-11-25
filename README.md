@@ -76,4 +76,6 @@ Iron Sword has been added to player's inventory.
 ## Phase 4: Task 3
 
 - See UML_Design_Diagram.pdf for UML class diagram (Class dependency excluded)
-- Further refactoring is not required in current design.
+- Further refactoring is not required in current design. 
+- However, if more random events are added to the game,
+A new class RandomEvent should be created and all the related methods should be refactored out from GameConsole and GameGUI. For example, a new method call addRandomEvent() will be implemented in RandomEvent. GameConsole and Game GUI will call this method to generate random event during the game.
