@@ -72,3 +72,8 @@ Iron Sword has been added to player's inventory.
 
 Mon Nov 22 16:21:44 PST 2021
 Iron Sword has been added to player's inventory.
+
+## Phase 4: Task 3
+
+- See UML_Design_Diagram.pdf for UML class diagram (Class dependency excluded)
+- Further refactoring is not required in current design.
